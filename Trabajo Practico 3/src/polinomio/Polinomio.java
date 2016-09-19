@@ -113,7 +113,7 @@ public class Polinomio {
 	public double evaluarMejorada(double x) {
 		double resultado = 0;
 
-		for (int i = coeficientes.length - 1; i >= 0; i--) {
+		for (int i = 0; i <= coeficientes.length - 1; i++) {
 			resultado = resultado * x + coeficientes[i];
 		}
 
@@ -146,7 +146,7 @@ public class Polinomio {
 
 	public static void main(String[] args) throws IOException {
 		double x = 3;
-		int grado = 5000;
+		int grado = 10000;
 		String path = "archivos/polinomioGrado" + grado + ".in";
 		// Polinomio.generarArchivoPolinomioAleatorio(path, grado);
 		Polinomio polinomio = new Polinomio(path);
