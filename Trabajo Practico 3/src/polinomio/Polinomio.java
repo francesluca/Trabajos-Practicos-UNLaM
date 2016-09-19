@@ -110,21 +110,21 @@ public class Polinomio {
 		return resultado;
 	}
 
-	public double evaluarMejorada(double x) {
-		double resultado = 0;
-
-		for (int i = 0; i <= coeficientes.length - 1; i++) {
-			resultado = resultado * x + coeficientes[i];
-		}
-
-		return resultado;
-	}
-
 	public double evaluarMathPow(double x) {
 		double resultado = 0;
 
 		for (int i = 0; i < coeficientes.length; i++) {
 			resultado += Math.pow(x, grado - i) * coeficientes[i];
+		}
+
+		return resultado;
+	}
+	
+	public double evaluarMejorada(double x) {
+		double resultado = 0;
+
+		for (int i = 0; i <= coeficientes.length - 1; i++) {
+			resultado = resultado * x + coeficientes[i];
 		}
 
 		return resultado;
