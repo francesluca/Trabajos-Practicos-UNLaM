@@ -55,11 +55,11 @@ public class TestPolinomio {
 	}
 	
 	@Test
-	public void testEvaluarMejorada() throws FileNotFoundException {
+	public void testEvaluarHorner() throws FileNotFoundException {
 		Polinomio polinomio = new Polinomio("archivos/polinomioGrado3.in");
 		double x = 2;
 		double resultado = 48;
 		
-		Assert.assertEquals(resultado, polinomio.evaluarMejorada(x), 0);
+		Assert.assertEquals(resultado, polinomio.evaluarHorner(x), 0);
 	}
 }

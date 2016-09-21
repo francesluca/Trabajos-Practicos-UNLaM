@@ -71,11 +71,11 @@ public class TestTiempoDeEvaluacion {
 		return (long)(tiempoFin.getTimeInMillis() - tiempoInicio.getTimeInMillis());
 	}
 	
-	public long tiempoMejorada(double x) {
+	public long tiempoHorner(double x) {
 
 		tiempoInicio = new GregorianCalendar();
 
-		polinomio.evaluarMejorada(x);
+		polinomio.evaluarHorner(x);
 
 		tiempoFin = new GregorianCalendar();
 

@@ -81,7 +81,7 @@ public class Polinomio {
 		double resultado = 0;
 
 		for (int i = 0; i < coeficientes.length; i++) {
-			resultado += potencia(x, grado - i) * coeficientes[i];
+			resultado += potenciaMejorada(x, grado - i) * coeficientes[i];
 		}
 
 		return resultado;
@@ -93,9 +93,9 @@ public class Polinomio {
 		}
 
 		if (grado % 2 == 0)
-			return x * potencia(x * x, grado / 2);
+			return potenciaMejorada(x * x, grado / 2);
 
-		return x * potencia(x, grado - 1);
+		return x * potenciaMejorada(x, grado - 1);
 	}
 
 	public double evaluarProgramacionDinamica(double x) {
@@ -120,11 +120,11 @@ public class Polinomio {
 		return resultado;
 	}
 	
-	public double evaluarMejorada(double x) {
+	public double evaluarHorner(double x) {
 		double resultado = 0;
 
 		for (int i = 0; i <= coeficientes.length - 1; i++) {
-			resultado = resultado * x + coeficientes[i];
+			resultado =  coeficientes[i] + (resultado * x);
 		}
 
 		return resultado;
@@ -145,24 +145,31 @@ public class Polinomio {
 	}
 
 	public static void main(String[] args) throws IOException {
-		double x = 3;
-		int grado = 10000;
+		double x = 1.01;
+		int grado = 15000;
 		String path = "archivos/polinomioGrado" + grado + ".in";
-		// Polinomio.generarArchivoPolinomioAleatorio(path, grado);
+		//Polinomio.generarArchivoPolinomioAleatorio(path, grado);
+		//System.out.println(p.evaluarMathPow(x));
+		
 		Polinomio polinomio = new Polinomio(path);
 		TestTiempoDeEvaluacion test = new TestTiempoDeEvaluacion(path);
 
-		System.out.println("Polinomio: " + polinomio);
-		System.out.println("\n------------Evaluaciones (x = 3, grado = " + grado + ")------------");
+		System.out.println("\n------------Evaluaciones (x = 2, grado = " + grado + ")------------");
 
-		if (grado <= 1000) {
-			System.out.println("Recursiva, tiempo: " + test.tiempoRecursiva(x) + " miliseg");
-			System.out.println("Recursiva Mejorada, tiempo: " + test.tiempoRecursivaMejorada(x) + " miliseg");
+		if (grado <= 5000) {
+			System.out.println("Recursiva, tiempo: " + test.tiempoRecursiva(x) + " miliseg" + " ,evaluacion: " + polinomio.evaluarRecursiva(x));
 		}
 
-		System.out.println("Multipl. sucesivas, tiempo: " + test.tiempoMultiplicacionesSucesivas(x) + " miliseg");
-		System.out.println("Math.Pow(), tiempo: " + test.tiempoMathPow(x) + " miliseg");
-		System.out.println("Programacion Dinamica, tiempo: " + test.tiempoProgramacionDinamica(x) + " miliseg");
-		System.out.println("Mejorada, tiempo: " + test.tiempoMejorada(x) + " miliseg");
+		if (grado <= 50000) {
+			System.out.println("Multipl. sucesivas, tiempo: " + test.tiempoMultiplicacionesSucesivas(x) + " miliseg" + " ,evaluacion: " + polinomio.evaluarMultiplicacionesSucesivas(x));
+		}
+		
+		if(grado <= 10000000) {
+			System.out.println("Recursiva Mejorada, tiempo: " + test.tiempoRecursivaMejorada(x) + " miliseg" + " ,evaluacion: " + polinomio.evaluarRecursivaMejorada(x));
+			System.out.println("Math.Pow(), tiempo: " + test.tiempoMathPow(x) + " miliseg" + " ,evaluacion: " + polinomio.evaluarMathPow(x));
+		}
+		
+		System.out.println("Programacion Dinamica, tiempo: " + test.tiempoProgramacionDinamica(x) + " miliseg" + " ,evaluacion: " + polinomio.evaluarProgramacionDinamica(x));
+		System.out.println("Polinomio Horner, tiempo: " + test.tiempoHorner(x) + " miliseg" + " ,evaluacion: " + polinomio.evaluarHorner(x));
 	}
 }
